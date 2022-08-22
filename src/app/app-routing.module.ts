@@ -15,6 +15,24 @@ const routes: Routes = [
     path: 'usuarios',
     loadChildren: () => import('./usuarios/usuarios.module').then( m => m.UsuariosPageModule)
   },
+  {
+    path: 'asis-alumno',
+    loadChildren: () => import('./asistencia/asis-alumno/asis-alumno.module').then( m => m.AsisAlumnoPageModule)
+  },
+  {
+    path: 'asis-profesor',
+    loadChildren: () => import('./asistencia/asis-profesor/asis-profesor.module').then( m => m.AsisProfesorPageModule)
+  },
+  {
+    path: 'menu-principal',
+    loadChildren: () => import('./menu/menu-principal/menu-principal.module').then( m => m.MenuPrincipalPageModule)
+  },
+  {
+    path: 'p-alumno',
+    loadChildren: () => import('./perfil/p-alumno/p-alumno.module').then( m => m.PAlumnoPageModule)
+  },
+
+
 
 ];
 
