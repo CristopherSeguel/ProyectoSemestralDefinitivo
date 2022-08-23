@@ -31,6 +31,11 @@ const routes: Routes = [
     path: 'p-alumno',
     loadChildren: () => import('./perfil/p-alumno/p-alumno.module').then( m => m.PAlumnoPageModule)
   },
+  {
+    path: '**',
+    loadChildren: () => import('./menu/nf/nf.module').then( m => m.NFPageModule)
+  },
+
 
 
 
