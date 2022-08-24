@@ -8,7 +8,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'usuarios/login',
+    redirectTo: 'p-alumno',
     pathMatch: 'full'
   },
   {
