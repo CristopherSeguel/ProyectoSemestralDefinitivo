@@ -38,22 +38,31 @@
               <ion-list>
                 <ion-item>
                   <ion-label position="floating">Nombre</ion-label>
-                  <ion-input type="text" formControlName="name"></ion-input>
-                  <app-error-message [field]="registerForm.getForm().get('name')" error="required" message="El nombre es obligatorio"></app-error-message>
+                  <ion-input type="text" formControlName="name" class="input-cover"></ion-input>
                 </ion-item>
+                <app-error-message [field]="registerForm.getForm().get('name')" error="required"  message="El nombre es obligatorio"></app-error-message>
+
                 <ion-item>
                   <ion-label position="floating">Correo</ion-label>
-                  <ion-input type="email" formControlName="email"></ion-input>
-                  <app-error-message [field]="registerForm.getForm().get('email')" error="required" message="El nombre es obligatorio"></app-error-message>
+                  <ion-input type="email" formControlName="email" class="input-cover"></ion-input>
                 </ion-item>
+                <app-error-message [field]="registerForm.getForm().get('email')" error="required" message="El correo es obligatorio"></app-error-message>
+                  <app-error-message [field]="registerForm.getForm().get('email')"  error="email" message="El email es invalido"></app-error-message>
+
                 <ion-item>
                   <ion-label position="floating">Contraseña</ion-label>
-                  <ion-input type="password" formControlName="password"></ion-input>
+                  <ion-input type="password" formControlName="password" class="input-cover"></ion-input>
                 </ion-item>
+                <app-error-message [field]="registerForm.getForm().get('password')" error="required" message="La contraseña es obligatoria"></app-error-message>
+                <app-error-message [field]="registerForm.getForm().get('password')" error="minlength" message="La contraseña debe tener como minimo 6 digitos"></app-error-message>
+
+
                 <ion-item>
                   <ion-label position="floating">Repetir Contraseña</ion-label>
-                  <ion-input type="password" formControlName="repeatPassword"></ion-input>
+                  <ion-input type="password" formControlName="repeatPassword" class="input-cover"></ion-input>
                 </ion-item>
+                <app-error-message [field]="registerForm.getForm().get('repeatPassword')" error="isntMatching" message="Las contraseñas no son identicas "></app-error-message>
+
 
 
 
@@ -66,7 +75,7 @@
         </ion-row>
         <ion-row>
           <ion-col>
-            <ion-button type="submit" fill="solid" expand="full" color="warning">
+            <ion-button type="submit" fill="solid" expand="full" color="tertiary" (click)="register()">
               Entrar
             </ion-button>
           </ion-col>

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { RegisterPageForm } from "./form/register.page.form";
-
+import { Router } from "@angular/router";
 
 
 @Component({
@@ -11,13 +11,25 @@ import { RegisterPageForm } from "./form/register.page.form";
 })
 export class RegisterPage implements OnInit {
   registerForm: RegisterPageForm;
-  constructor(private formBuilder: FormBuilder) {}
+  constructor(private formBuilder: FormBuilder,
+              private router: Router) {}
 
   showPassword = false;
   passwordToggleIcon = 'eye';
 
   ngOnInit() {
     this.createForm();
+  }
+
+  register(){
+    this.registerForm.getForm().markAllAsTouched();
+
+    if (this.registerForm.getForm().valid) {
+      //Verificar login
+      this.router.navigate(['home'])
+      
+      
+    }
   }
 
   private createForm(){

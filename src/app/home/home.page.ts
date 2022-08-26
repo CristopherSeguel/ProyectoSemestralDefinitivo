@@ -1,4 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, NgZone } from '@angular/core';
+import { AnimationOptions } from 'ngx-lottie';
+import { AnimationItem } from "lottie-web";
+
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-home',
@@ -7,6 +11,32 @@ import { Component } from '@angular/core';
 })
 export class HomePage {
 
-  constructor() {}
+  slideOpts = {
+    initialSlide: 1,
+    speed: 400
+  };
+  private animation :AnimationItem;
+  options:AnimationOptions = {
+    path:'assets/112545-wumpus-hi.json'
+  }
+
+
+
+  constructor(private ngZone:NgZone, private router: Router) {}
+
+  created(animation:AnimationItem){
+    console.log(animation);
+  }
+
+
+  ingresar(){
+    this.router.navigate(['usuarios/login'])
+  }
+
+  registro(){
+    this.router.navigate(['usuarios/register'])
+
+  }
+
 
 }

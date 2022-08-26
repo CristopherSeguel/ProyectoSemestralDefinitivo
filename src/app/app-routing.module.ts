@@ -3,12 +3,12 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
-    path: 'home',
+    path: 'menu-principal',
     loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
   },
   {
     path: '',
-    redirectTo: 'menu-principal',
+    redirectTo: 'home',
     pathMatch: 'full'
   },
   {
@@ -31,11 +31,6 @@ const routes: Routes = [
     path: 'p-alumno',
     loadChildren: () => import('./perfil/p-alumno/p-alumno.module').then( m => m.PAlumnoPageModule)
   },
-  {
-    path: '**',
-    loadChildren: () => import('./menu/nf/nf.module').then( m => m.NFPageModule)
-  },
-
 
 
 

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+import { ToastController } from "@ionic/angular";
 
 @Component({
   selector: 'app-recover-password',
@@ -8,9 +9,26 @@ import { Router } from '@angular/router';
 })
 export class RecoverPasswordPage implements OnInit {
 
-  constructor(private router: Router) { }
+  e: string = "";
+
+  constructor(public toastController: ToastController,private router: Router, private activatedRouter: ActivatedRoute) { 
+    this.activatedRouter.queryParams.subscribe(params =>{
+      if(this.router.getCurrentNavigation().extras.state){
+        this.e = this.router.getCurrentNavigation().extras.state.ema;
+        
+      }
+    })
+  }
 
   ngOnInit() {
+  }
+
+  async presentToast() {
+    const toast = await this.toastController.create({
+      message: 'Codigo incorrecto.',
+      duration: 3000
+    });
+    toast.present();
   }
 
 

@@ -1,14 +1,16 @@
 
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import {
   FormGroup,
   FormControl,
   Validators,
   FormBuilder
 } from '@angular/forms';
-import { AlertController } from '@ionic/angular';
+import { AlertController, IonModal  } from '@ionic/angular';
+import { OverlayEventDetail } from '@ionic/core/components';
 
-import { Router } from '@angular/router';
+import { Router, NavigationExtras } from '@angular/router';
+import { ValueAccessor } from '@ionic/angular/directives/control-value-accessors/value-accessor';
 
 @Component({
   selector: 'app-login',
@@ -16,6 +18,34 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
+
+  @ViewChild(IonModal) modal: IonModal;
+  
+  message = 'This modal example uses triggers to automatically open a modal when the button is clicked.';
+  name: string;
+
+  cancel() {
+    this.modal.dismiss(null, 'cancel');
+  }
+
+  confirm() {
+    this.modal.dismiss(this.name, 'confirm');
+    this.pasarDatos();
+    
+  }
+
+  onWillDismiss(event: Event) {
+    const ev = event as CustomEvent<OverlayEventDetail<string>>;
+    if (ev.detail.role === 'confirm') {
+      
+      this.email = "";
+    }
+  }
+
+  email: string = "";
+  
+
+
 
   formularioLogin: FormGroup;
 
@@ -39,6 +69,13 @@ export class LoginPage implements OnInit {
     this.router.navigate(['usuarios/register'])
   }
 
+  menu(){
+    this.router.navigate(['menu/menu-principal'])
+  }
+
+
+  
+
 
   
 
@@ -56,6 +93,7 @@ export class LoginPage implements OnInit {
       const alert = await this.alertController.create({
         header: 'Datos incorrectos',
         message: 'Los datos que ingresaste son incorrectos.',
+        cssClass: 'myalert',
         buttons: ['Aceptar']
       });
 
@@ -64,36 +102,18 @@ export class LoginPage implements OnInit {
   }
 
 
-  //Alerta para ingresar correo
-  async presentAlert() {
-    const alert = await this.alertController.create({
-      header: 'Has olvidado tu contraseña',
-      subHeader: 'ingresa tu dirección de correo electrónico y te ayudaremos a restablecer tu contraseña',
-      buttons: [
-        {
-          text: 'Cancel',
-          role: 'cancel',
-          handler: () => {
-            console.log('Cancel clicked');
-          }
-        },
-        {
-          text: 'Buy',
-          handler: () => {
-            this.router.navigate(['usuarios/recover-password']);
-          }
-        }
-      ],
-      
-      inputs: [
-        {
-          placeholder: 'Email',
-        },
-        
-      ],
-    });
+ 
 
-    await alert.present();
+
+
+  pasarDatos(){
+    let navigationExtras: NavigationExtras ={
+      state:{
+        ema: this.email,
+        
+      }
+    }
+    this.router.navigate(['usuarios/recover-password'], navigationExtras);
   }
 
 
