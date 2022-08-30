@@ -22,6 +22,7 @@
     "@ionic/angular": "^6.1.9",
     "lottie-web": "^5.9.6",
     "ngx-lottie": "^8.2.2",
+    "patente-chilena-dv": "^0.0.7",
     "rxjs": "~6.6.0",
     "tslib": "^2.2.0",
     "zone.js": "~0.11.4"

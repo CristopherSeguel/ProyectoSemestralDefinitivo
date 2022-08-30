@@ -34,6 +34,9 @@ export class ForgotPasswordPage implements OnInit {
       this.passwordToggleIcon = 'eye';
     }
   }
+
+
+  
    
 //Mostrar e ocultar contra
 

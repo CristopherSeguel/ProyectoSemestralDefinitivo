@@ -34,13 +34,13 @@
           <ion-col>
             <ion-list>
               <form [formGroup]="formularioLogin">
-                <ion-item>
+                <ion-item lines="full" class="Input">
                   <ion-icon name="person" class="icon-login"></ion-icon>
-                  <ion-input name="user" type="text" required placeholder="Usuario" formControlName="nombre">
+                  <ion-input name="user"  type="text" required placeholder="Usuario" formControlName="nombre">
                   </ion-input>
                 </ion-item>
                 <br />
-                <ion-item>
+                <ion-item lines="full" class="Input">
                   <ion-icon name="lock-closed-outline" class="icon-login"></ion-icon>
                   <ion-input name="password" type="password" required placeholder="Contraseña"
                     formControlName="password"></ion-input>
@@ -51,7 +51,7 @@
         </ion-row>
         <ion-row>
           <ion-col>
-            <ion-button type="submit" fill="solid" expand="full" color="tertiary" shape="round" (click)="ingresar()">
+            <ion-button type="submit" fill="solid" expand="full" color="tertiary" shape="round" (click)="ingresar()" >
               Entrar
             </ion-button>
           </ion-col>

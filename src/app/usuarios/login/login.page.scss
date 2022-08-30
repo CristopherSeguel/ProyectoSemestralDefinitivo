@@ -92,4 +92,28 @@ ion-slide {
     margin: auto;
     width: 50%;
    }
+
+
+
+
+   //INPUTS PABLO
+
+.Input{
+    border-radius:10px;
+    --ion-background-color: rgb(228, 208, 239);
+    border: solid 1px rgb(95, 13, 172);
+    width: 100%;
+    height: 50px;
+    margin-bottom: 10px; 
+  }
+  
+  .Input:focus{
+    text-align: black;
+    
+  }
+
+  .color-label:focus{
+    color: #6441a5;
+  }
+
  

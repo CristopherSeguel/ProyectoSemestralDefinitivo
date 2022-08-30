@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { IonModal  } from '@ionic/angular';
 import { RegisterPageForm } from "./form/register.page.form";
 import { Router } from "@angular/router";
+import { OverlayEventDetail } from '@ionic/core/components';
 
 
 @Component({
@@ -10,6 +12,34 @@ import { Router } from "@angular/router";
   styleUrls: ['./register.page.scss'],
 })
 export class RegisterPage implements OnInit {
+
+  //REGISTRO PROFESOR MODAL
+
+@ViewChild(IonModal) modal: IonModal;
+  
+message = 'This modal example uses triggers to automatically open a modal when the button is clicked.';
+name: string;
+
+cancel() {
+  this.modal.dismiss(null, 'cancel');
+}
+
+confirm() {
+  this.modal.dismiss(this.name, 'confirm');
+  
+  
+}
+
+onWillDismiss(event: Event) {
+  const ev = event as CustomEvent<OverlayEventDetail<string>>;
+  if (ev.detail.role === 'confirm') {
+    
+    
+  }
+}
+
+
+  facePlottingOption: boolean = false;
   registerForm: RegisterPageForm;
   constructor(private formBuilder: FormBuilder,
               private router: Router) {}
@@ -26,7 +56,7 @@ export class RegisterPage implements OnInit {
 
     if (this.registerForm.getForm().valid) {
       //Verificar login
-      this.router.navigate(['home'])
+      this.router.navigate(['/home'])
       
       
     }
@@ -47,5 +77,28 @@ export class RegisterPage implements OnInit {
     }
   }
    
-//Mostrar e ocultar contra
+//verificacion checkbox
+
+public checkboxFacePlotting(e) {
+  if (e.currentTarget.checked) {
+    console.log("=========FACE PLOTTING ENABLED");
+    this.facePlottingOption = true;
+    
+  } else {
+    console.log("=========FACE PLOTTING DISABLED");
+    this.facePlottingOption = false;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
 }

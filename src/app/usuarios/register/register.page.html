@@ -1,6 +1,7 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>register</ion-title>
+    <ion-back-button defaultHref="/home" slot="start"></ion-back-button>
+    <ion-title>Registro Usuario</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -16,57 +17,99 @@
       </ion-col>
     </ion-row>
 
-    <ion-row class="row2">
-      <ion-col>
 
-      </ion-col>
-    </ion-row>
 
   </ion-grid>
 
   <ion-slide>
-    <div class="contaier-login">
+    <div>
       <ion-grid>
-        <ion-row>
+        <ion-row class="ion-aling-items-center">
           <ion-col>
             <h1 class="titulo">Registro Alumno</h1>
           </ion-col>
         </ion-row>
+
+        <ion-card class="container-login">
+          <ion-list>
+            <ion-item>
+              <ion-avatar class="avatar">
+                <img src="assets/avatar-default-1.jpg">
+              </ion-avatar>
+
+            </ion-item>
+            <ion-item-text-center >
+              <ion-button type="submit" fill="solid" expand="full" size="small" color="tertiary" shape="round"
+                (click)="ingresar()">
+                Cambiar foto
+              </ion-button>
+            </ion-item-text-center>
+          </ion-list>
+
+        </ion-card>
         <ion-row>
           <ion-col>
+
+
+
+
             <form [formGroup]="registerForm.getForm()">
               <ion-list>
-                <ion-item>
-                  <ion-label position="floating">Nombre</ion-label>
+                <ion-item lines="full" class="Input">
+                  <ion-label position="floating" class="color-label">Nombre</ion-label>
                   <ion-input type="text" formControlName="name" class="input-cover"></ion-input>
                 </ion-item>
-                <app-error-message [field]="registerForm.getForm().get('name')" error="required"  message="El nombre es obligatorio"></app-error-message>
+                <ion-row slot="start">
+                  <app-error-message [field]="registerForm.getForm().get('name')" error="required"
+                  message="El nombre es obligatorio"></app-error-message>
+                </ion-row>
+                
 
-                <ion-item>
+                <ion-item lines="full" class="Input">
                   <ion-label position="floating">Correo</ion-label>
                   <ion-input type="email" formControlName="email" class="input-cover"></ion-input>
                 </ion-item>
-                <app-error-message [field]="registerForm.getForm().get('email')" error="required" message="El correo es obligatorio"></app-error-message>
-                  <app-error-message [field]="registerForm.getForm().get('email')"  error="email" message="El email es invalido"></app-error-message>
+                
+                <ion-row slot="start">
+                  <app-error-message [field]="registerForm.getForm().get('email')" error="required"
+                  message="El correo es obligatorio"></app-error-message>
+                <app-error-message [field]="registerForm.getForm().get('email')" error="email"
+                  message="El email es invalido"></app-error-message>
+                </ion-row>
 
-                <ion-item>
+                <ion-item lines="full" class="Input">
                   <ion-label position="floating">Contraseña</ion-label>
                   <ion-input type="password" formControlName="password" class="input-cover"></ion-input>
                 </ion-item>
-                <app-error-message [field]="registerForm.getForm().get('password')" error="required" message="La contraseña es obligatoria"></app-error-message>
-                <app-error-message [field]="registerForm.getForm().get('password')" error="minlength" message="La contraseña debe tener como minimo 6 digitos"></app-error-message>
+
+                <ion-row slot="start">
+                  <app-error-message [field]="registerForm.getForm().get('password')" error="required"
+                  message="La contraseña es obligatoria"></app-error-message>
+                <app-error-message [field]="registerForm.getForm().get('password')" error="minlength"
+                  message="La contraseña debe tener como minimo 6 digitos"></app-error-message>
+                </ion-row>
+                
 
 
-                <ion-item>
+                <ion-item lines="full" class="Input">
                   <ion-label position="floating">Repetir Contraseña</ion-label>
                   <ion-input type="password" formControlName="repeatPassword" class="input-cover"></ion-input>
                 </ion-item>
-                <app-error-message [field]="registerForm.getForm().get('repeatPassword')" error="isntMatching" message="Las contraseñas no son identicas "></app-error-message>
 
+                <ion-row slot="start">
+                  <app-error-message [field]="registerForm.getForm().get('repeatPassword')" error="isntMatching"
+                  message="Las contraseñas no son identicas "></app-error-message>
+                </ion-row>
+              
 
+                <ion-list>
+                  <ion-item>
+                    <ion-label>Eres Docente?</ion-label>
+                    <ion-checkbox color="danger" checked="{{facePlottingOption}}" id="open-modal"
+                      (ionChange)="checkboxFacePlotting($event)"></ion-checkbox>
 
-
-
+                  </ion-item>
+                </ion-list>
               </ion-list>
 
             </form>
@@ -75,12 +118,124 @@
         </ion-row>
         <ion-row>
           <ion-col>
-            <ion-button type="submit" fill="solid" expand="full" color="tertiary" (click)="register()">
+            <ion-button type="submit" fill="solid" expand="full" color="tertiary"  shape="round" (click)="register()">
               Entrar
             </ion-button>
           </ion-col>
         </ion-row>
 
+
+
+
+
+
+
+
+
+
+
+        <!--MODAL para registro profesor-->
+        <ion-row>
+          <ion-col>
+            <ion-modal trigger="open-modal" (willDismiss)="onWillDismiss($event)">
+              <ng-template>
+                <ion-header>
+                  <ion-toolbar>
+                    <ion-buttons slot="start">
+                      <ion-button (click)="cancel()" color="medium">Cancel</ion-button>
+                    </ion-buttons>
+                    <ion-title></ion-title>
+                    <ion-buttons slot="end">
+                      <ion-button (click)="confirm()" color="tertiary">Confirm</ion-button>
+                    </ion-buttons>
+                  </ion-toolbar>
+                </ion-header>
+                <ion-content class="ion-padding" >
+
+
+
+
+                  <ion-row class="ion-aling-items-center">
+                    <ion-col>
+                      <h1 class="titulo">Registro Docente</h1>
+                    </ion-col>
+                  </ion-row>
+
+
+
+
+                  
+
+
+                  
+
+
+                  <form [formGroup]="registerForm.getForm()">
+                    <ion-list>
+                      <ion-item lines="full" class="Input">
+                        <ion-label position="floating">Nombre</ion-label>
+                        <ion-input type="text" formControlName="name" class="input-cover"></ion-input>
+                      </ion-item>
+                      <app-error-message [field]="registerForm.getForm().get('name')" error="required"
+                        message="El nombre es obligatorio"></app-error-message>
+
+                      <ion-item lines="full" class="Input">
+                        <ion-label position="floating">Correo</ion-label>
+                        <ion-input type="email" formControlName="email" class="input-cover"></ion-input>
+                      </ion-item>
+
+                      <ion-row slot="start">
+                        <app-error-message [field]="registerForm.getForm().get('email')" error="required"
+                        message="El correo es obligatorio"></app-error-message>
+                      <app-error-message [field]="registerForm.getForm().get('email')" error="email"
+                        message="El email es invalido"></app-error-message> 
+                      </ion-row>
+
+                      <ion-item lines="full" class="Input">
+                        <ion-label position="floating">Contraseña</ion-label>
+                        <ion-input type="password" formControlName="password" class="input-cover"></ion-input>
+                      </ion-item>
+                      <app-error-message [field]="registerForm.getForm().get('password')" error="required"
+                        message="La contraseña es obligatoria"></app-error-message>
+                      <app-error-message [field]="registerForm.getForm().get('password')" error="minlength"
+                        message="La contraseña debe tener como minimo 6 digitos"></app-error-message>
+
+
+                      <ion-item lines="full" class="Input">
+                        <ion-label position="floating">Repetir Contraseña</ion-label>
+                        <ion-input type="password" formControlName="repeatPassword" class="input-cover" ></ion-input>
+                      </ion-item>
+                      <app-error-message [field]="registerForm.getForm().get('repeatPassword')" error="isntMatching"
+                        message="Las contraseñas no son identicas "></app-error-message>
+
+                        
+
+
+
+                      <ion-row>
+                        <ion-col>
+                          <ion-button type="submit" fill="solid" expand="full" color="tertiary" (click)="register()">
+                            Entrar
+                          </ion-button>
+                        </ion-col>
+                      </ion-row>
+
+    
+
+
+                    </ion-list>
+
+                  </form>
+
+
+
+
+
+                </ion-content>
+              </ng-template>
+            </ion-modal>
+          </ion-col>
+        </ion-row>
 
 
 
